@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot Password | PassTheATS</title>
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="d-flex align-items-center justify-content-center position-relative">
+
+    <a href="/login" class="back-link">
+        <i class="bi bi-arrow-left"></i> Back to Login
+    </a>
+
+    <button class="btn btn-link text-secondary position-absolute top-0 end-0 m-3 m-md-4" onclick="toggleTheme()" title="Toggle Theme" style="text-decoration: none; z-index: 10;">
+        <i id="theme-icon" class="bi bi-moon-stars-fill fs-4"></i>
+    </button>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-4">
+                
+                <div class="text-center mb-4">
+                    <div class="mb-2">
+                        <i class="bi bi-lightning-charge-fill text-primary fs-3"></i>
+                    </div>
+                    <h3 class="fw-bold brand-logo">PassTheATS</h3>
+                    <p class="text-secondary small">Enter your email to reset your password.</p>
+                </div>
+
+                {% if error %}
+                <div class="alert alert-danger shadow-sm border-0 d-flex align-items-center gap-2 p-3 rounded-3 mb-4">
+                    <i class="bi bi-exclamation-circle-fill"></i>
+                    <div>{{ error }}</div>
+                </div>
+                {% endif %}
+
+                <form method="POST" class="glass-card p-4 p-md-5">
+                    
+                    <div class="form-floating mb-3">
+                        <input name="email" type="email" class="form-control" id="emailInput" placeholder="name@example.com" required>
+                        <label for="emailInput">Email address</label>
+                    </div>
+
+                    <button class="btn btn-primary-custom w-100 mb-4">
+                        Reset Password <i class="bi bi-arrow-right-short"></i>
+                    </button>
+
+                    <div class="text-center">
+                        <p class="text-secondary small mb-0">Remember your password?</p>
+                        <a href="/login" class="text-decoration-none fw-bold text-dark">Log in</a>
+                    </div>
+
+                </form>
+
+                <div class="text-center mt-4">
+                    <small class="text-muted opacity-75">&copy; 2024 PassTheATS. Secure Login.</small>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+
+    <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
+</body>
+</html>

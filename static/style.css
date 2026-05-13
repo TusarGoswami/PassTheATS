@@ -1,0 +1,835 @@
+/* ═══════════════════════════════════════════════════════════
+   ✨ PassTheATS - Advanced Glassmorphic Design System
+   ═══════════════════════════════════════════════════════════
+   Features: Dynamic gradients, particle effects, micro-interactions,
+   fluid animations, and accessibility-first design
+   ═══════════════════════════════════════════════════════════ */
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   🎨 1. COLOR SYSTEM & THEME VARIABLES
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+:root {
+    /* ─── Light Mode: Ethereal & Clean ─── */
+    --primary: #3b82f6;
+    --primary-light: #60a5fa;
+    --primary-dark: #2563eb;
+    --accent: #8b5cf6;
+    
+    --bg-base: #f8fafc;
+    --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    --bg-mesh: 
+        radial-gradient(at 40% 20%, hsla(217, 100%, 90%, 0.3) 0px, transparent 50%),
+        radial-gradient(at 80% 0%, hsla(262, 100%, 90%, 0.3) 0px, transparent 50%),
+        radial-gradient(at 0% 50%, hsla(340, 100%, 90%, 0.3) 0px, transparent 50%);
+    
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.9);
+    --glass-shadow: 
+        0 8px 32px 0 rgba(31, 38, 135, 0.15),
+        0 2px 8px 0 rgba(0, 0, 0, 0.05);
+    --glass-blur: 16px;
+    
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #94a3b8;
+    --text-inverse: #ffffff;
+    
+    --input-bg: rgba(255, 255, 255, 0.5);
+    --input-border: rgba(148, 163, 184, 0.3);
+    --input-focus-glow: rgba(59, 130, 246, 0.25);
+    
+    --success-bg: rgba(16, 185, 129, 0.1);
+    --success-color: #059669;
+    --success-glow: rgba(16, 185, 129, 0.3);
+    
+    --danger-bg: rgba(239, 68, 68, 0.1);
+    --danger-color: #dc2626;
+    --danger-glow: rgba(239, 68, 68, 0.3);
+    
+    --warning-bg: rgba(251, 191, 36, 0.1);
+    --warning-color: #f59e0b;
+    
+    --info-bg: rgba(59, 130, 246, 0.1);
+    --info-color: #3b82f6;
+    
+    /* ─── Animation Speeds ─── */
+    --transition-fast: 150ms;
+    --transition-base: 300ms;
+    --transition-slow: 500ms;
+    --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* ─── Dark Mode: Neon Cyberpunk Vibes ─── */
+[data-bs-theme="dark"] {
+    --primary: #60a5fa;
+    --primary-light: #93c5fd;
+    --primary-dark: #3b82f6;
+    --accent: #a78bfa;
+    
+    --bg-base: #0f172a;
+    --bg-gradient: linear-gradient(135deg, #1e293b 0%, #0f172a 50%, #020617 100%);
+    --bg-mesh: 
+        radial-gradient(at 40% 20%, hsla(217, 100%, 50%, 0.15) 0px, transparent 50%),
+        radial-gradient(at 80% 0%, hsla(262, 100%, 50%, 0.15) 0px, transparent 50%),
+        radial-gradient(at 0% 50%, hsla(340, 100%, 50%, 0.15) 0px, transparent 50%);
+    
+    --glass-bg: rgba(15, 23, 42, 0.6);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-shadow: 
+        0 8px 32px 0 rgba(0, 0, 0, 0.5),
+        0 0 80px 0 rgba(59, 130, 246, 0.1),
+        inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+    --glass-blur: 20px;
+    
+    --text-primary: #f1f5f9;
+    --text-secondary: #cbd5e1;
+    --text-muted: #64748b;
+    --text-inverse: #0f172a;
+    
+    --input-bg: rgba(15, 23, 42, 0.8);
+    --input-border: rgba(255, 255, 255, 0.1);
+    --input-focus-glow: rgba(96, 165, 250, 0.4);
+    
+    --success-bg: rgba(34, 197, 94, 0.15);
+    --success-color: #4ade80;
+    --success-glow: rgba(34, 197, 94, 0.5);
+    
+    --danger-bg: rgba(248, 113, 113, 0.15);
+    --danger-color: #f87171;
+    --danger-glow: rgba(248, 113, 113, 0.5);
+    
+    --warning-bg: rgba(251, 191, 36, 0.15);
+    --warning-color: #fbbf24;
+    
+    --info-bg: rgba(96, 165, 250, 0.15);
+    --info-color: #60a5fa;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   🌊 2. ANIMATED BACKGROUND & BASE STYLES
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--bg-base);
+    background-image: var(--bg-mesh);
+    color: var(--text-primary);
+    min-height: 100vh;
+    overflow-x: hidden;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color var(--transition-slow) var(--ease-smooth);
+    position: relative;
+}
+
+/* Animated Gradient Mesh Background */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-gradient);
+    opacity: 0.05;
+    z-index: -1;
+    animation: meshMove 20s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes meshMove {
+    0%, 100% { transform: scale(1) rotate(0deg); }
+    50% { transform: scale(1.1) rotate(5deg); }
+}
+
+/* Floating Particles Effect */
+body::after {
+    content: '';
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background-image: 
+        radial-gradient(2px 2px at 20% 30%, var(--primary), transparent),
+        radial-gradient(2px 2px at 60% 70%, var(--accent), transparent),
+        radial-gradient(1px 1px at 50% 50%, var(--primary-light), transparent);
+    background-size: 200px 200px, 300px 300px, 150px 150px;
+    opacity: 0.3;
+    animation: particleFloat 60s linear infinite;
+    pointer-events: none;
+    z-index: -1;
+}
+
+[data-bs-theme="dark"] body::after {
+    opacity: 0.15;
+}
+
+@keyframes particleFloat {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(50px, 50px); }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   📜 3. CUSTOM SCROLLBAR DESIGN
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--primary), var(--accent));
+    border-radius: 10px;
+    border: 2px solid var(--bg-base);
+    transition: all var(--transition-base);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, var(--primary-light), var(--primary));
+    transform: scale(1.1);
+}
+
+/* Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary) transparent;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   💎 4. ULTRA GLASSMORPHISM CARDS
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.glass-card,
+.report-card,
+.dashboard-card,
+.card,
+.navbar {
+    background: var(--glass-bg) !important;
+    border: 1px solid var(--glass-border) !important;
+    box-shadow: var(--glass-shadow);
+    backdrop-filter: blur(var(--glass-blur)) saturate(120%);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(120%);
+    border-radius: 20px;
+    transition: all var(--transition-base) var(--ease-smooth);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Shimmer Effect on Hover */
+.glass-card::before,
+.report-card::before,
+.dashboard-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+    );
+    transform: rotate(45deg);
+    transition: all 0.6s;
+    opacity: 0;
+}
+
+.glass-card:hover::before,
+.report-card:hover::before,
+.dashboard-card:hover::before {
+    opacity: 1;
+    animation: shimmer 1.5s ease-in-out;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+}
+
+/* Interactive Card Hover */
+.report-card:hover,
+.dashboard-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 
+        0 20px 60px rgba(0, 0, 0, 0.15),
+        0 0 40px var(--input-focus-glow);
+    border-color: var(--primary) !important;
+}
+
+.report-card:active,
+.dashboard-card:active {
+    transform: translateY(-4px) scale(1.01);
+}
+
+/* Navbar Specific */
+.navbar {
+    border-radius: 0 0 24px 24px;
+    border-top: none !important;
+    backdrop-filter: blur(24px) saturate(150%);
+    z-index: 1000;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   📝 5. ADVANCED FORM INPUTS & INTERACTIONS
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.form-control,
+.form-select {
+    background: var(--input-bg) !important;
+    border: 2px solid var(--input-border) !important;
+    color: var(--text-primary) !important;
+    border-radius: 12px;
+    padding: 14px 18px;
+    font-size: 15px;
+    transition: all var(--transition-base) var(--ease-smooth);
+    position: relative;
+}
+
+.form-control::placeholder {
+    color: var(--text-muted);
+    opacity: 0.7;
+}
+
+/* Focus State with Glow */
+.form-control:focus,
+.form-select:focus {
+    outline: none;
+    border-color: var(--primary) !important;
+    background: var(--input-bg) !important;
+    box-shadow: 
+        0 0 0 4px var(--input-focus-glow),
+        0 8px 16px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Floating Labels */
+.form-floating > label {
+    color: var(--text-muted);
+    transition: all var(--transition-fast);
+}
+
+.form-floating > .form-control:focus ~ label,
+.form-floating > .form-control:not(:placeholder-shown) ~ label {
+    color: var(--primary);
+    transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
+    opacity: 1;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   📤 6. DRAG & DROP UPLOAD ZONE
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.upload-area {
+    background: var(--input-bg);
+    border: 3px dashed var(--input-border);
+    border-radius: 20px;
+    padding: 4rem 2rem;
+    text-align: center;
+    transition: all var(--transition-base) var(--ease-bounce);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.upload-area::before {
+    content: '📁';
+    position: absolute;
+    font-size: 120px;
+    opacity: 0.05;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: all var(--transition-base);
+}
+
+.upload-area:hover {
+    border-color: var(--primary);
+    background: var(--input-focus-glow);
+    transform: scale(1.02);
+}
+
+.upload-area:hover::before {
+    opacity: 0.1;
+    transform: translate(-50%, -50%) scale(1.1) rotate(5deg);
+}
+
+.upload-area.dragover {
+    border-color: var(--success-color);
+    background: var(--success-bg);
+    transform: scale(1.05);
+    box-shadow: 0 0 30px var(--success-glow);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   🎯 7. BUTTONS WITH MICRO-INTERACTIONS
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.btn {
+    border-radius: 12px;
+    padding: 12px 28px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    transition: all var(--transition-base) var(--ease-smooth);
+    position: relative;
+    overflow: hidden;
+    border: none;
+}
+
+/* Primary Button */
+.btn-primary,
+.btn-primary-custom {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: var(--text-inverse);
+    box-shadow: 
+        0 4px 15px var(--input-focus-glow),
+        0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary::before,
+.btn-primary-custom::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn-primary:hover::before,
+.btn-primary-custom:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.btn-primary:hover,
+.btn-primary-custom:hover {
+    transform: translateY(-3px);
+    box-shadow: 
+        0 8px 25px var(--input-focus-glow),
+        0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.btn-primary:active,
+.btn-primary-custom:active {
+    transform: translateY(-1px);
+}
+
+/* Outline Buttons */
+.btn-outline-primary {
+    border: 2px solid var(--primary);
+    color: var(--primary);
+    background: transparent;
+}
+
+.btn-outline-primary:hover {
+    background: var(--primary);
+    color: var(--text-inverse);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px var(--input-focus-glow);
+}
+
+/* Icon Buttons */
+.btn-icon {
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    transition: all var(--transition-base);
+}
+
+.btn-icon:hover {
+    transform: rotate(15deg) scale(1.1);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   🏷️ 8. BADGES & STATUS INDICATORS
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.badge {
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    transition: all var(--transition-fast);
+    border: 1px solid transparent;
+}
+
+.badge-soft-success,
+.bg-success-subtle {
+    background: var(--success-bg) !important;
+    color: var(--success-color) !important;
+    border-color: var(--success-color);
+}
+
+.badge-soft-success:hover {
+    box-shadow: 0 4px 12px var(--success-glow);
+    transform: scale(1.05);
+}
+
+.badge-soft-danger,
+.bg-danger-subtle {
+    background: var(--danger-bg) !important;
+    color: var(--danger-color) !important;
+    border-color: var(--danger-color);
+}
+
+.badge-soft-danger:hover {
+    box-shadow: 0 4px 12px var(--danger-glow);
+    transform: scale(1.05);
+}
+
+.badge-soft-warning {
+    background: var(--warning-bg) !important;
+    color: var(--warning-color) !important;
+    border-color: var(--warning-color);
+}
+
+.badge-soft-info {
+    background: var(--info-bg) !important;
+    color: var(--info-color) !important;
+    border-color: var(--info-color);
+}
+
+/* Pulsing Badge Animation */
+.badge-pulse {
+    animation: badgePulse 2s ease-in-out infinite;
+}
+
+@keyframes badgePulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.05); opacity: 0.9; }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   📊 9. PROGRESS BARS & METERS
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.progress {
+    height: 12px;
+    border-radius: 10px;
+    background: var(--input-bg);
+    overflow: hidden;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.progress-bar {
+    background: linear-gradient(90deg, var(--primary), var(--primary-light));
+    border-radius: 10px;
+    transition: width 1s var(--ease-smooth);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Animated Stripes */
+.progress-bar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.2) 25%,
+        transparent 25%,
+        transparent 50%,
+        rgba(255, 255, 255, 0.2) 50%,
+        rgba(255, 255, 255, 0.2) 75%,
+        transparent 75%,
+        transparent
+    );
+    background-size: 30px 30px;
+    animation: progressStripes 1s linear infinite;
+}
+
+@keyframes progressStripes {
+    0% { background-position: 0 0; }
+    100% { background-position: 30px 30px; }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   📋 10. TABLES & DATA DISPLAY
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.table {
+    --bs-table-bg: transparent;
+    --bs-table-color: var(--text-primary);
+    --bs-table-hover-bg: var(--input-focus-glow);
+    border-color: var(--input-border);
+}
+
+.table thead th {
+    background: var(--input-bg);
+    border-bottom: 2px solid var(--primary);
+    color: var(--text-secondary);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 1px;
+    padding: 16px;
+}
+
+.table tbody tr {
+    transition: all var(--transition-fast);
+    border-bottom: 1px solid var(--input-border);
+}
+
+.table tbody tr:hover {
+    background: var(--input-focus-glow);
+    transform: scale(1.01);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.table tbody td {
+    padding: 16px;
+    vertical-align: middle;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   💬 11. ALERTS & NOTIFICATIONS
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.alert {
+    border-radius: 16px;
+    border: none;
+    padding: 18px 24px;
+    backdrop-filter: blur(10px);
+    animation: slideInRight 0.4s var(--ease-smooth);
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.alert-success {
+    background: var(--success-bg);
+    color: var(--success-color);
+    border-left: 4px solid var(--success-color);
+}
+
+.alert-danger {
+    background: var(--danger-bg);
+    color: var(--danger-color);
+    border-left: 4px solid var(--danger-color);
+}
+
+.alert-warning {
+    background: var(--warning-bg);
+    color: var(--warning-color);
+    border-left: 4px solid var(--warning-color);
+}
+
+.alert-info {
+    background: var(--info-bg);
+    color: var(--info-color);
+    border-left: 4px solid var(--info-color);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   🎭 12. DARK MODE SPECIFIC OVERRIDES
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+[data-bs-theme="dark"] .text-dark {
+    color: var(--text-primary) !important;
+}
+
+[data-bs-theme="dark"] .text-secondary,
+[data-bs-theme="dark"] .text-muted {
+    color: var(--text-muted) !important;
+}
+
+[data-bs-theme="dark"] .bg-light {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid var(--glass-border);
+}
+
+[data-bs-theme="dark"] h1,
+[data-bs-theme="dark"] h2,
+[data-bs-theme="dark"] h3,
+[data-bs-theme="dark"] h4,
+[data-bs-theme="dark"] h5,
+[data-bs-theme="dark"] h6 {
+    color: #ffffff;
+    letter-spacing: -0.5px;
+    text-shadow: 0 0 20px rgba(96, 165, 250, 0.3);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   🎨 13. GRADIENT ACCENTS & SPECIAL EFFECTS
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.gradient-glass {
+    background: linear-gradient(
+        135deg,
+        rgba(59, 130, 246, 0.1) 0%,
+        rgba(139, 92, 246, 0.1) 100%
+    ) !important;
+    border: 1px solid var(--primary) !important;
+    backdrop-filter: blur(16px);
+    position: relative;
+}
+
+[data-bs-theme="dark"] .gradient-glass {
+    background: linear-gradient(
+        135deg,
+        rgba(96, 165, 250, 0.15) 0%,
+        rgba(167, 139, 250, 0.15) 100%
+    ) !important;
+    box-shadow: 
+        0 8px 32px rgba(96, 165, 250, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Glowing Text */
+.text-glow {
+    text-shadow: 0 0 20px var(--primary), 0 0 40px var(--primary);
+    animation: textGlow 3s ease-in-out infinite;
+}
+
+@keyframes textGlow {
+    0%, 100% { text-shadow: 0 0 20px var(--primary); }
+    50% { text-shadow: 0 0 40px var(--primary), 0 0 60px var(--accent); }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   🔧 14. UTILITY CLASSES
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.section-header {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+    position: relative;
+    padding-left: 16px;
+}
+
+.section-header::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 16px;
+    background: linear-gradient(180deg, var(--primary), var(--accent));
+    border-radius: 2px;
+}
+
+/* Back Link */
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-weight: 600;
+    padding: 10px 16px;
+    border-radius: 10px;
+    transition: all var(--transition-base);
+}
+
+.back-link:hover {
+    color: var(--primary);
+    background: var(--input-focus-glow);
+    transform: translateX(-4px);
+}
+
+/* Loading Spinner */
+.spinner-custom {
+    width: 40px;
+    height: 40px;
+    border: 4px solid var(--input-border);
+    border-top-color: var(--primary);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Fade In Animation */
+.fade-in {
+    animation: fadeIn 0.6s var(--ease-smooth);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   📱 15. RESPONSIVE DESIGN
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+@media (max-width: 768px) {
+    .glass-card,
+    .report-card,
+    .dashboard-card {
+        border-radius: 16px;
+    }
+    
+    .upload-area {
+        padding: 2rem 1rem;
+    }
+    
+    .btn {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+    
+    body::after {
+        opacity: 0.2;
+    }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   ♿ 16. ACCESSIBILITY ENHANCEMENTS
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Focus Visible for Keyboard Navigation */
+*:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   ✨ End of PassTheATS Design System
+   ═══════════════════════════════════════════════════════════ */
