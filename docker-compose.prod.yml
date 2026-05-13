@@ -1,0 +1,22 @@
+services:
+  web:
+    image: tusar0027/passtheats-web:latest
+    ports:
+      - "80:5000"
+    env_file:
+      - .env
+    environment:
+      - FLASK_ENV=production
+      - MONGO_URI=mongodb://mongodb:27017/passtheats
+    depends_on:
+      - mongodb
+    restart: always
+
+  mongodb:
+    image: mongo:latest
+    volumes:
+      - mongodb_prod_data:/data/db
+    restart: always
+
+volumes:
+  mongodb_prod_data:
