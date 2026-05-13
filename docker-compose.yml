@@ -20,12 +20,15 @@ services:
       - mongodb_data:/data/db
 
   jenkins:
-    image: jenkins/jenkins:lts
+    build:
+      context: .
+      dockerfile: Dockerfile.jenkins
+    user: root
     ports:
       - "8080:8080"
     volumes:
       - jenkins_data:/var/jenkins_home
-
+      - /var/run/docker.sock:/var/run/docker.sock
 volumes:
   mongodb_data:
   jenkins_data:

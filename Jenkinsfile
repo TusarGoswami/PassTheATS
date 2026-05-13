@@ -2,43 +2,40 @@ pipeline {
     agent any
 
     environment {
-        // Define any environment variables needed for your pipeline here
-        FLASK_ENV = 'testing'
+        // Tag docker images with the jenkins build number
+        IMAGE_NAME = "passtheats-web"
+        IMAGE_TAG = "build-${BUILD_NUMBER}"
     }
 
     stages {
         stage('Checkout') {
             steps {
-                // Jenkins automatically checks out the code from the repo,
-                // but this stage is here for clarity.
                 checkout scm
                 echo 'Source code checked out successfully.'
             }
         }
 
-        stage('Build') {
+        stage('Docker Build') {
             steps {
-                echo 'Building the Docker image for the Flask app...'
-                // If you had Docker inside Jenkins, you could run:
-                // sh 'docker build -t passtheats-web .'
-                echo 'Build step complete.'
+                echo "Building the Docker image: ${IMAGE_NAME}:${IMAGE_TAG}..."
+                // Build the image using the Dockerfile in the project
+                sh "docker build -t ${IMAGE_NAME}:${IMAGE_TAG} ."
+                sh "docker tag ${IMAGE_NAME}:${IMAGE_TAG} ${IMAGE_NAME}:latest"
             }
         }
 
-        stage('Test') {
+        stage('Security / Sanity Test') {
             steps {
-                echo 'Running tests...'
-                // Here you would run your tests, e.g., pytest
-                // sh 'pytest'
-                echo 'Tests passed successfully.'
+                echo 'Running a quick test inside the container...'
+                // We run the newly built container and check if python/flask starts without crashing
+                sh "docker run --rm ${IMAGE_NAME}:latest python -c \"import flask; print('Flask is installed and container works!')\""
             }
         }
 
-        stage('Deploy') {
+        stage('Deploy (Mock / AWS Preparation)') {
             steps {
-                echo 'Deploying application...'
-                // Code to deploy your app goes here
-                echo 'Deployment successful!'
+                echo 'Image is ready for AWS deployment!'
+                echo "To push to AWS ECR, we would run: docker push aws-account-id.dkr.ecr.region.amazonaws.com/${IMAGE_NAME}:${IMAGE_TAG}"
             }
         }
     }
