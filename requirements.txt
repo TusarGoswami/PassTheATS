@@ -60,16 +60,11 @@ pydantic_core==2.33.1
 Pygments==2.19.1
 pyparsing==3.2.1
 pypdfium2==5.3.0
-PyQt6==6.8.1
-PyQt6-Qt6==6.8.2
-PyQt6_sip==13.10.0
 pytest==8.3.5
 python-dateutil==2.9.0.post0
 python-dotenv==1.2.1
 python-engineio==4.11.2
 python-socketio==5.12.1
-QDarkStyle==3.2.3
-QtPy==2.4.3
 reportlab==4.4.0
 requests==2.32.3
 requests-oauthlib==2.0.0
