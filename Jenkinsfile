@@ -32,10 +32,26 @@ pipeline {
             }
         }
 
-        stage('Deploy (Mock / AWS Preparation)') {
+        stage('Push to Docker Hub') {
             steps {
-                echo 'Image is ready for AWS deployment!'
-                echo "To push to AWS ECR, we would run: docker push aws-account-id.dkr.ecr.region.amazonaws.com/${IMAGE_NAME}:${IMAGE_TAG}"
+                echo 'Preparing to push to Docker Hub...'
+                // We use 'docker-hub-credentials' which you will create in Jenkins UI
+                withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
+                    
+                    // 1. Login to Docker Hub safely using the credentials
+                    sh 'echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin'
+                    
+                    // 2. Tag the image with your Docker Hub username
+                    sh "docker tag ${IMAGE_NAME}:${IMAGE_TAG} ${DOCKER_USERNAME}/${IMAGE_NAME}:${IMAGE_TAG}"
+                    sh "docker tag ${IMAGE_NAME}:${IMAGE_TAG} ${DOCKER_USERNAME}/${IMAGE_NAME}:latest"
+                    
+                    // 3. Push both the specific build tag and the 'latest' tag
+                    echo 'Uploading image to Docker Hub...'
+                    sh "docker push ${DOCKER_USERNAME}/${IMAGE_NAME}:${IMAGE_TAG}"
+                    sh "docker push ${DOCKER_USERNAME}/${IMAGE_NAME}:latest"
+                    
+                    echo 'Successfully pushed to Docker Hub! 🎉'
+                }
             }
         }
     }
