@@ -180,7 +180,7 @@ Flask (Backend) → Gemini AI → PostgreSQL (Prod) / SQLite (Dev)
 
 ```bash
 # 1. Clone repository
-git clone https://github.com/raahul-kr/PassTheATS.git
+git clone https://github.com/TusarGoswami/PassTheATS.git
 cd PassTheATS
 
 # 2. Install dependencies
@@ -575,3 +575,36 @@ git push origin feature/amazing-feature
 - Include examples in your PR description
 
 <br>
+
+## 📜 License
+
+MIT © 2026 Tusar Goswami  
+*Free to use, free to modify, free to share*
+
+<br>
+
+<div align="center">
+
+## 👨‍💻 Creator
+
+**Tusar Goswami**  
+*Full Stack & AI Developer*
+
+[![GitHub](https://img.shields.io/badge/TusarGoswami-100000?style=flat&logo=github&logoColor=white)](https://github.com/TusarGoswami)
+[![LinkedIn](https://img.shields.io/badge/Connect-0077B5?style=flat&logo=linkedin&logoColor=white)](https://linkedin.com/in/tusargoswami)
+
+*Building tools that make a difference* 🚀
+
+<br>
+
+---
+
+<sub>**PassTheATS** · Empowering job seekers with AI-driven insights</sub>
+
+⭐ Star this repo if it helped you land an interview!
+
+<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png" width="100%" />
+
+**Made with ❤️ and lots of ☕**
+
+</div>
