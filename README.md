@@ -14,7 +14,6 @@
 [![Powered by Gemini](https://img.shields.io/badge/Gemini-8E75B2?style=flat&logo=google&logoColor=white)](https://ai.google.dev/)
 [![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white)](https://www.docker.com/)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=flat&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
-[![MIT License](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat)](LICENSE)
 
 [Live Demo](https://passtheats.onrender.com) · [Quick Start](#-quick-start) · [Features](#-features) · [Deploy](#-deployment)
 
@@ -246,7 +245,6 @@ PassTheATS/
 ├── 📄 .gitignore                  # Git ignore rules
 ├── 🚀 app.py                      # Flask application entry point
 ├── 🐳 Dockerfile                  # Container configuration
-├── 📜 LICENSE                     # MIT License
 ├── 🔧 list_models.py              # Gemini model utility
 ├── 📖 README.md                   # This file
 ├── 📋 requirements.txt            # Python dependencies
@@ -573,13 +571,6 @@ git push origin feature/amazing-feature
 - Update documentation for new features
 - Test thoroughly before submitting
 - Include examples in your PR description
-
-<br>
-
-## 📜 License
-
-MIT © 2026 Tusar Goswami  
-*Free to use, free to modify, free to share*
 
 <br>
 
