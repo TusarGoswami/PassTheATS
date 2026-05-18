@@ -13,9 +13,10 @@
 [![Made with Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)](https://www.python.org/)
 [![Powered by Gemini](https://img.shields.io/badge/Gemini-8E75B2?style=flat&logo=google&logoColor=white)](https://ai.google.dev/)
 [![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white)](https://www.docker.com/)
-[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=flat&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=flat&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
+[![Jenkins](https://img.shields.io/badge/Jenkins-D24939?style=flat&logo=jenkins&logoColor=white)](https://www.jenkins.io/)
 
-[Live Demo](https://passtheats.onrender.com) · [Quick Start](#-quick-start) · [Features](#-features) · [Deploy](#-deployment)
+[Quick Start](#-quick-start) · [Features](#-features) · [CI/CD Pipeline](#-jenkins-cicd-pipeline) · [Docker Configuration](#-docker-setup)
 
 <br>
 
@@ -33,7 +34,7 @@ You've spent hours perfecting your resume. You hit submit. **Silence.**
 
 Was it the keywords? The format? The ATS? You'll never know—until now.
 
-**PassTheATS** doesn't just scan your resume. It thinks like a recruiter, validates like an ATS, and coaches like a mentor. All powered by AI.
+**PassTheATS** doesn't just scan your resume. It thinks like a recruiter, validates like an ATS, and coaches like a mentor. All powered by Gemini AI and a robust document parsing architecture.
 
 <br>
 
@@ -45,13 +46,13 @@ Was it the keywords? The format? The ATS? You'll never know—until now.
 <td width="33%">
 
 **📄 Smart Upload**
-- PDF resume parsing
+- PDF resume parsing via `pdfplumber`
 - Job description input
 - Role-based templates
 - Real-time processing
 
 </td>
-<td width="33%">
+td width="33%">
 
 **🎯 ATS Scoring**
 - Keyword match analysis
@@ -66,7 +67,7 @@ Was it the keywords? The format? The ATS? You'll never know—until now.
 - Interactive dashboard
 - Progress tracking
 - Historical analysis
-- Export capabilities
+- Risk assessment visualizations
 
 </td>
 </tr>
@@ -81,10 +82,10 @@ Unlike traditional ATS tools, we verify if skills are actually **proven**:
 ✅ Proven        → Backed by projects/experience
 
 Skill Strength:
-├─ 🟢 Strong   (Multiple proofs)
-├─ 🟡 Medium   (Some proof)
-├─ 🟠 Weak     (Minimal proof)
-└─ 🔴 Missing  (No mention)
+├─ 🟢 Strong   (Multiple proofs in Projects/Experience)
+├─ 🟡 Medium   (Some proof in overall body)
+├─ 🟠 Weak     (Listed in Skills section but no proof)
+└─ 🔴 Missing  (No mention in the resume)
 ```
 
 **Output:** Proof Score (%), Skill classification, Recommendations
@@ -94,81 +95,76 @@ Skill Strength:
 Identifies resume manipulation:
 
 - **Keyword Stuffing** - Excessive repetition without context
-- **Fake Skills** - Listed but never used in experience
-- **Weak Evidence** - Claims without substantiation
+- **Fake Skills** - Listed in the skills block but never used in projects/experience
+- **Weak Evidence** - Technical claims without substantiation
 
 **Risk Levels:** `LOW` | `MEDIUM` | `HIGH`  
-**Output:** Detailed reasons, statistics, actionable fixes
+**Output:** Detailed reasonings, metrics, and actionable fixes
 
 ### 🎯 Role-Based Rubric Scoring
 
-Weighted evaluation like real companies:
+Weighted evaluation like real companies based on custom schemas:
 
 ```javascript
 const rubric = {
   "Backend Engineer": {
-    skills: 35%,      // Technical competency
-    experience: 30%,  // Years & relevance
-    projects: 20%,    // Practical work
-    education: 15%    // Academic background
+    "python": 20,
+    "sql": 20,
+    "api": 20,
+    "authentication": 15,
+    "docker": 10
   }
 }
 ```
 
-**Roles Supported:** Backend, Frontend, Cloud, DevOps, Data Science, Product, and more
+**Roles Supported:** Backend Developer, Frontend Developer, Cloud Engineer, and DevOps Intern.
 
 ### 🤖 AI-Powered Intelligence
 
-Gemini API integration for advanced insights:
+Google Gemini API integration for advanced insights:
 
 | Feature | Description |
 |---------|-------------|
-| 💡 **Resume Suggestions** | Personalized improvement recommendations |
-| 🎤 **Interview Questions** | Role-specific questions based on your resume |
-| 🧠 **Recruiter Verdict** | Professional assessment of overall readiness |
-| 🎯 **Gap Analysis** | Identifies missing skills for target role |
+| 💡 **Resume Suggestions** | Personalized improvement recommendations starting with action verbs |
+| 🎤 **Interview Questions** | Role-specific questions targeting your weakest/unproven skills |
+| 🧠 **Recruiter Verdict** | 4-line professional assessment of overall readiness |
 
-**Reliability:** Smart fallback logic if API fails
+**Reliability:** Seamless fallback logic to offline analysis if the Gemini API fails.
 
 ### 🔐 User System
 
-Full authentication & history management:
+Full authentication & history management powered by MongoDB Atlas:
 
 - ✅ Secure registration & login
-- ✅ Password hashing (Werkzeug)
-- ✅ Analysis history storage
-- ✅ Full report replay
-- ✅ Delete saved reports
-- ✅ Progress visualization
+- ✅ Password hashing via `Werkzeug`
+- ✅ Dynamic analysis history storage
+- ✅ Full report replay & history dashboard
+- ✅ Delete saved reports capability
 
 <br>
 
 ## 🛠️ Tech Stack
 
-### Backend
+### Backend & Storage
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![Flask](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
-![SQLite](https://img.shields.io/badge/SQLite-07405E?style=for-the-badge&logo=sqlite&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
 
 ### AI & Tools
 ![Google Gemini](https://img.shields.io/badge/Gemini-8E75B2?style=for-the-badge&logo=google&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+![Jenkins](https://img.shields.io/badge/Jenkins-D24939?style=for-the-badge&logo=jenkins&logoColor=white)
 
 ### Frontend
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 
-### DevOps
-![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white)
-![Render](https://img.shields.io/badge/Render-46E3B7?style=for-the-badge&logo=render&logoColor=white)
-
 **Architecture:**
 ```
-Flask (Backend) → Gemini AI → PostgreSQL (Prod) / SQLite (Dev)
+Flask (Backend) → Gemini AI (Analysis) → MongoDB Atlas (Data Layer)
          ↓
-    Docker Container → Render Cloud → CI/CD
+    Docker Container → Jenkins CI/CD → Docker Hub Registry
 ```
 
 <br>
@@ -177,49 +173,45 @@ Flask (Backend) → Gemini AI → PostgreSQL (Prod) / SQLite (Dev)
 
 ### Local Development
 
+#### 1. Clone repository
 ```bash
-# 1. Clone repository
 git clone https://github.com/TusarGoswami/PassTheATS.git
 cd PassTheATS
-
-# 2. Install dependencies
-pip install -r requirements.txt
-
-# 3. Configure environment
-cat > .env << EOF
-GEMINI_API_KEY=your_api_key_here
-DATABASE_URL=sqlite:///instance/hirelens.db
-EOF
-
-# 4. Run application
-python app.py
-
-# 5. Open browser
-# → http://localhost:5000
 ```
 
-### 🐳 Docker Setup
+#### 2. Install dependencies
+```bash
+pip install -r requirements.txt
+```
+
+#### 3. Configure environment
+Create a `.env` file in the project root:
+```env
+GEMINI_API_KEY=your_api_key_here
+MONGO_URI=mongodb://localhost:27017/passtheats
+```
+
+#### 4. Run application
+```bash
+python app.py
+```
+
+#### 5. Open browser
+Go to [http://localhost:5000](http://localhost:5000)
+
+<br>
+
+## 🐳 Docker Setup
+
+Build and run your containerized environment:
 
 ```bash
-# Build image
-docker build -t passtheats .
+# Build the image locally
+docker build -t passtheats-web:latest .
 
-# Run container
-docker run -p 5000:5000 --env-file .env passtheats
-
-# Access at http://localhost:5000
+# Run with environment variables
+docker run -p 5000:5000 --env-file .env passtheats-web:latest
 ```
-
-### ☁️ Production (Render)
-
-**Live URL:** [https://passtheats.onrender.com](https://passtheats.onrender.com)
-
-**Features:**
-- ✅ Docker-based deployment
-- ✅ Managed PostgreSQL database
-- ✅ Auto-deploy via GitHub Actions
-- ✅ Environment variable management
-- ✅ SSL/HTTPS enabled
 
 <br>
 
@@ -227,11 +219,12 @@ docker run -p 5000:5000 --env-file .env passtheats
 
 ```
 PassTheATS/
-├── 🧠 core/           # Intelligence layer
-├── 🎨 templates/      # User interface
-├── 💾 db/             # Data models
-├── 📁 static/         # Assets & styles
-└── 🚀 app.py          # Mission control
+├── 🧠 core/           # Intelligence & analysis layer
+├── 🎨 templates/      # Jinja2 HTML templates
+├── 💾 db/             # Database connection & models
+├── 📁 static/         # Frontend CSS, JS & assets
+├── 🚀 app.py          # Flask mission control
+└── ⚙️ Jenkinsfile      # Declarative CI/CD pipeline
 ```
 
 <details>
@@ -241,113 +234,77 @@ PassTheATS/
 PassTheATS/
 │
 ├── 📄 .dockerignore               # Docker build exclusions
-├── 📄 .env                        # Environment variables (create this)
+├── 📄 .env                        # Local environment secrets
 ├── 📄 .gitignore                  # Git ignore rules
 ├── 🚀 app.py                      # Flask application entry point
-├── 🐳 Dockerfile                  # Container configuration
-├── 🔧 list_models.py              # Gemini model utility
-├── 📖 README.md                   # This file
+├── 🐳 Dockerfile                  # Production container configuration
+├── 🐳 Dockerfile.jenkins          # Jenkins environment runner
+├── ⚙️ Jenkinsfile                  # Declarative Jenkins pipeline script
+├── 🔧 list_models.py              # Gemini model testing utility
+├── 📖 README.md                   # This documentation
 ├── 📋 requirements.txt            # Python dependencies
 │
-├── 📁 .github/                    # GitHub configuration
-│   └── workflows/
-│       └── render-deploy.yml      # CI/CD pipeline
-│
 ├── 🧠 core/                       # Intelligence layer
-│   ├── ai_interview_questions.py  # AI question generator
-│   ├── ai_suggestions.py          # AI resume tips
-│   ├── ai_summary.py              # AI recruiter verdict
-│   ├── cheat_detector.py          # ⭐ Keyword stuffing detection
-│   ├── interview_questions.py     # Base interview questions
-│   ├── jd_parser.py               # Job description parsing
-│   ├── jd_templates.py            # Pre-built JD templates
-│   ├── keyword_extractor.py       # Keyword identification
-│   ├── proof_checker.py           # ⭐ Skill verification
-│   ├── resume_parser.py           # PDF text extraction
-│   ├── resume_sections.py         # Section identification
-│   ├── rubrics.py                 # Role-based scoring
-│   ├── scoring_engine.py          # ATS score calculation
-│   ├── __init__.py                # Package initializer
-│   └── __pycache__/               # Python bytecode cache
+│   ├── ai_interview_questions.py  # Gemini question generator
+│   ├── ai_suggestions.py          # Gemini resume feedback engine
+│   ├── ai_summary.py              # Recruiter verdict summary generator
+│   ├── cheat_detector.py          # Keyword stuffing checker
+│   ├── interview_questions.py     # Base fallback questions
+│   ├── jd_parser.py               # Fallback suggestions engine
+│   ├── jd_templates.py            # Custom roles templates (Backend, Frontend, etc)
+│   ├── keyword_extractor.py       # Technical keyword cleaning & parsing
+│   ├── proof_checker.py           # Skill evidence checker (Strong/Medium/Weak)
+│   ├── resume_parser.py           # pdfplumber PDF reader integration
+│   ├── resume_sections.py         # Sequential regex layout segmenter
+│   ├── rubrics.py                 # Weighted role metrics (Backend, DevOps, etc)
+│   ├── scoring_engine.py          # ATS & Rubric calculations
+│   └── __init__.py                # Package initializer
 │
 ├── 💾 db/                         # Database layer
-│   ├── models.py                  # SQLAlchemy models (User, Report)
-│   └── __pycache__/               # Python bytecode cache
-│
-├── 📂 instance/                   # Runtime data
-│   └── hirelens.db                # SQLite database (dev only)
+│   └── models.py                  # PyMongo models (User, Report)
 │
 ├── 🎨 static/                     # Frontend assets
-│   ├── style.css                  # ⭐ Minimal glassmorphism design
-│   ├── assets/                    # Images, icons
-│   ├── css/                       # Additional stylesheets
+│   ├── style.css                  # Glassmorphism visual design
+│   ├── assets/                    # Static graphics
 │   └── js/
-│       └── theme.js               # ⭐ Advanced theme engine
+│       └── theme.js               # Advanced dark/light theme engine
 │
-├── 📄 templates/                  # HTML views
-│   ├── demo.html                  # Try without signup
-│   ├── history.html               # Analysis history
-│   ├── index.html                 # Landing page
-│   ├── login.html                 # User authentication
-│   ├── register.html              # User registration
-│   └── report.html                # Analysis results
-│
-└── 📤 uploads/                    # File storage
-    └── resumes/                   # PDF resume uploads
+└── 🎨 templates/                  # HTML views
+    ├── demo.html                  # Demo analyzer (No login required)
+    ├── history.html               # User reports historical tracking
+    ├── index.html                 # Main landing dashboard
+    ├── login.html                 # Authentication login
+    ├── register.html              # Authentication signup
+    └── report.html                # High-fidelity dashboard report
 ```
 
 </details>
 
+<br>
 
 ## ⚙️ Configuration
 
-### Environment Variables
-
-Create `.env` file in project root (never commit this):
-
-```bash
-# Required - Get from https://ai.google.dev/
-GEMINI_API_KEY=your_gemini_api_key_here
-
-# Database Configuration
-# Development (SQLite)
-DATABASE_URL=sqlite:///instance/hirelens.db
-
-# Production (PostgreSQL - Render auto-provides this)
-# DATABASE_URL=postgresql://user:pass@host:port/dbname
-
-# Optional
-FLASK_ENV=development
-SECRET_KEY=your_secret_key_here
-```
-
-### Customization
-
-**Role-Based Rubrics** (`core/rubrics.py`):
+### Role-Based Rubrics (`core/rubrics.py`):
 ```python
-RUBRICS = {
-    "Software Engineer": {
-        "skills_weight": 0.35,
-        "experience_weight": 0.30,
-        "projects_weight": 0.20,
-        "education_weight": 0.15
-    },
-    "Your Custom Role": {
-        # Add your weights here
+ROLE_RUBRICS = {
+    "backend_developer": {
+        "python": 20,
+        "java": 15,
+        "sql": 20,
+        "api": 20,
+        "authentication": 15,
+        "docker": 10
     }
 }
 ```
 
-**Job Description Templates** (`core/jd_templates.py`):
+### Database Switcher (`db/models.py`):
 ```python
-TEMPLATES = {
-    "Backend Engineer": """
-    [Existing template...]
-    """,
-    "Your Custom Role": """
-    [Your custom JD template...]
-    """
-}
+def init_db(app):
+    global db
+    mongo_uri = os.environ.get("MONGO_URI", "mongodb://localhost:27017/passtheats")
+    client = MongoClient(mongo_uri)
+    db = client["passtheats"]
 ```
 
 <br>
@@ -355,15 +312,15 @@ TEMPLATES = {
 ## 🎯 How It Works
 
 ```mermaid
-graph LR
-    A[📄 Upload Resume] --> B[🔍 Parse PDF]
-    B --> C[🎯 Extract Keywords]
-    C --> D[🧠 Verify Skills]
-    D --> E[🚨 Check Stuffing]
-    E --> F[📊 Calculate Scores]
-    F --> G[🤖 AI Analysis]
-    G --> H[💡 Generate Report]
-    H --> I[💾 Save History]
+graph TD
+    A[📄 Upload Resume PDF] --> B[🔍 pdfplumber Text Extraction]
+    B --> C[✂️ Regex Section Slicing]
+    C --> D[🎯 Keyword Extracting]
+    D --> E[🧠 Evidence Proof Evaluation]
+    E --> F[🚨 Stuffing Risk Assessment]
+    F --> G[🤖 Google Gemini API Analysis]
+    G --> H[📊 Render Report Dashboard]
+    H --> I[💾 Save to MongoDB Atlas]
     
     style A fill:#e1f5ff,color:#000
     style B fill:#fff3e0,color:#000
@@ -377,200 +334,41 @@ graph LR
 
 <br>
 
+## 🔄 Jenkins CI/CD Pipeline
+
+Automated distribution pipeline defined in the local [Jenkinsfile](file:///c:/Users/tusar/OneDrive/Desktop/PassTheATS-main/Jenkinsfile):
+
+```
+[Checkout SCM] ──> [Docker Build] ──> [Security/Sanity Test] ──> [Push to Docker Hub]
+```
+
+**Pipeline Stages:**
+1. **Checkout:** Clones the latest branch state from source control.
+2. **Docker Build:** Packages the codebase into a containerized `passtheats-web` image.
+3. **Security / Sanity Test:** Starts the container and tests if the Flask runtime environment executes correctly.
+4. **Push to Docker Hub:** Signs into Docker registry securely using Jenkins credentials, tagging and pushing both `build-${BUILD_NUMBER}` and `latest` tags.
+
+<br>
+
 ## 💡 What Makes Us Different
 
 | Feature | Traditional ATS | PassTheATS |
 |---------|:---------------:|:----------:|
-| Keyword Matching | ✅ Basic | ✅ Advanced |
-| Skill Proof Verification | ❌ None | ✅ **Unique** |
-| Keyword Stuffing Detection | ❌ None | ✅ **Unique** |
-| AI Resume Suggestions | ❌ None | ✅ Gemini-powered |
-| AI Interview Questions | ❌ None | ✅ Role-aware |
-| Role-Based Rubrics | ❌ Generic | ✅ Company-style |
-| Recruiter Verdict | ❌ None | ✅ AI summary |
-| Progress Tracking | ❌ One-time | ✅ Full history |
-| Cloud Deployment | ❌ Local only | ✅ Production-ready |
-| Docker Support | ❌ None | ✅ Containerized |
-| CI/CD Pipeline | ❌ Manual | ✅ Automated |
+| Keyword Matching | ✅ Basic | ✅ Context-Aware |
+| Skill Proof Verification | ❌ None | ✅ **Unique (Strong/Weak Evaluation)** |
+| Keyword Stuffing Detection | ❌ None | ✅ **Unique (Anti-Cheat Engine)** |
+| AI Resume Suggestions | ❌ None | ✅ Gemini-powered Action Prompts |
+| AI Interview Questions | ❌ None | ✅ Target-oriented to Weak Skills |
+| Database Storage | ❌ Single Scan | ✅ persistent **MongoDB Atlas** |
+| CI/CD Pipeline | ❌ Manual | ✅ Automated **Jenkins Pipeline** |
 
 <br>
 
-## 🔄 CI/CD Pipeline
+## 🧠 One-Line Summary
 
-Automated deployment via GitHub Actions (`.github/workflows/render-deploy.yml`):
+> An AI-driven resume scoring and anti-cheat platform built with Flask, Google Gemini API, and MongoDB, fully containerized with Docker and distributed via an automated Jenkins CI/CD pipeline.
 
-```yaml
-GitHub Push → GitHub Actions → Docker Build → Render Deploy
-     ↓              ↓                ↓              ↓
-   main       Run Tests       Create Image     Live Update
-```
-
-**Workflow Features:**
-- ✅ Triggers on push to `main` branch
-- ✅ Builds Docker container
-- ✅ Deploys to Render automatically
-- ✅ Zero manual intervention
-- ✅ Instant rollback capability
-
-<br>
-
-## 🐳 Docker Configuration
-
-**Dockerfile:**
-```dockerfile
-FROM python:3.13-slim
-WORKDIR /app
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-COPY . .
-EXPOSE 5000
-CMD ["python", "app.py"]
-```
-
-**.dockerignore:**
-```
-__pycache__/
-*.pyc
-*.pyo
-.env
-.git/
-instance/
-uploads/
-.vscode/
-.idea/
-*.log
-```
-
-**Build & Run:**
-```bash
-# Local build
-docker build -t passtheats .
-
-# Run with environment file
-docker run -p 5000:5000 --env-file .env passtheats
-
-# Run with inline env vars
-docker run -p 5000:5000 \
-  -e GEMINI_API_KEY=your_key \
-  -e DATABASE_URL=sqlite:///instance/hirelens.db \
-  passtheats
-```
-
-<br>
-
-## 🗺️ Roadmap
-
-### ✅ Completed (v1.0)
-- [x] Core ATS analysis engine
-- [x] PDF resume parsing
-- [x] Skill proof verification system
-- [x] Keyword stuffing detection
-- [x] AI integration (Google Gemini)
-- [x] User authentication & sessions
-- [x] Analysis history & reports
-- [x] Role-based rubric scoring
-- [x] Docker containerization
-- [x] PostgreSQL production database
-- [x] Cloud deployment (Render)
-- [x] CI/CD automation (GitHub Actions)
-- [x] Dark mode theme support
-
-### 🚧 In Progress (v1.1)
-- [ ] PDF report export functionality
-- [ ] Email notifications for analysis completion
-- [ ] Pre-built resume templates
-- [ ] Batch resume analysis
-- [ ] Enhanced error handling
-
-### 🌟 Planned (v2.0)
-- [ ] **Recruiter Dashboard** - Multi-resume comparison
-- [ ] **LinkedIn Integration** - Import profile data
-- [ ] **Cover Letter Analyzer** - AI-powered review
-- [ ] **ATS Simulation Modes** - Company-specific emulation
-- [ ] **REST API** - Third-party integrations
-- [ ] **Mobile App** - React Native
-- [ ] **Browser Extension** - Chrome/Firefox
-- [ ] **Team Collaboration** - Multi-user workspaces
-- [ ] **Analytics Dashboard** - Usage insights
-- [ ] **White-label Solution** - Custom branding
-
-<br>
-
-## 🎪 Try It Now
-
-### 🎬 Demo Mode
-**No signup required** → [Try Demo](https://passtheats.onrender.com/demo)
-
-### 🔥 Full Features
-**Create free account** → [Sign Up](https://passtheats.onrender.com/register)
-
-```
-┌─────────────────────────────────────┐
-│  1. 📂 Upload your resume (PDF)     │
-│  2. 📝 Paste job description        │
-│  3. ⚡ Click "Analyze Resume"       │
-│  4. 🎉 Get comprehensive insights   │
-│  5. 📊 Save & track progress        │
-│  6. 💡 Iterate and improve          │
-└─────────────────────────────────────┘
-```
-
-<br>
-
-## 🧠 One-Line Resume Summary
-
-> Built an AI-powered resume analysis platform using Flask and Gemini API that evaluates ATS compatibility, verifies skill proof, detects keyword stuffing, generates AI-driven resume feedback and interview questions, with Docker-based cloud deployment on Render, PostgreSQL persistence, and automated CI/CD via GitHub Actions.
-
-**Tech Stack:** Python · Flask · Gemini AI · PostgreSQL · Docker · GitHub Actions · Render
-
-<br>
-
-## 📌 Project Status
-
-| Component | Status | Details |
-|-----------|:------:|---------|
-| 🐳 **Dockerization** | ✅ Complete | Multi-platform container support |
-| ☁️ **Cloud Deployment** | ✅ Live | https://passtheats.onrender.com |
-| 🗄️ **PostgreSQL** | ✅ Production | Managed database on Render |
-| 🔄 **CI/CD** | ✅ Automated | GitHub Actions workflow |
-| 🚀 **Production Ready** | ✅ Stable | SSL, HTTPS, monitoring |
-| 📱 **Mobile Responsive** | ✅ Optimized | Works on all devices |
-| 🌙 **Dark Mode** | ✅ Advanced | Smart theme switching |
-| 🔐 **Security** | ✅ Secure | Password hashing, SQL injection protection |
-
-<br>
-
-## 🤝 Contributing
-
-Contributions are welcome! Here's how you can help:
-
-```bash
-# 1. Fork the repository on GitHub
-
-# 2. Clone your fork
-git clone https://github.com/YOUR_USERNAME/PassTheATS.git
-cd PassTheATS
-
-# 3. Create a feature branch
-git checkout -b feature/amazing-feature
-
-# 4. Make your changes and commit
-git add .
-git commit -m "Add: amazing feature description"
-
-# 5. Push to your fork
-git push origin feature/amazing-feature
-
-# 6. Open a Pull Request on GitHub
-```
-
-**Contribution Guidelines:**
-- Follow PEP 8 Python style guide
-- Write clear commit messages
-- Add comments for complex logic
-- Update documentation for new features
-- Test thoroughly before submitting
-
+**Tech Stack:** Python · Flask · Gemini AI · MongoDB · Docker · Jenkins
 
 <br>
 
