@@ -570,7 +570,7 @@ git push origin feature/amazing-feature
 - Add comments for complex logic
 - Update documentation for new features
 - Test thoroughly before submitting
-- Include examples in your PR description
+
 
 <br>
 
